@@ -1,20 +1,25 @@
 extends Node3D
 
-@onready var skeleton : Skeleton3D = $'Skeleton3D'
+@onready var skeleton: Skeleton3D = $'Skeleton3D'
 
-var mouse_position_3d : Vector3
+var mouse_position_3d: Vector3
 
-var left_hand : Transform3D
-var left_hand_id : int
+var left_hand: Transform3D
+var left_hand_id: int
 
-var right_hand : Transform3D
-var right_hand_id : int 
+var right_hand: Transform3D
+var right_hand_id: int 
 
-var left_ik : Marker3D
-var right_ik : Marker3D
+var left_forearm: Transform3D
+var left_forearm_id: int
 
-@export var amount : float = 1
-@export var persistent : bool = true
+var right_forearm: Transform3D
+var right_forearm_id: int
+
+var left_ik: Marker3D
+var right_ik: Marker3D
+
+@export var hand_separation: float = .1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -27,40 +32,25 @@ func _ready():
 	left_ik = $'Skeleton3D/LeftArmIKTarget'
 	right_ik = $'Skeleton3D/RightArmIKTarget'
 	
+	left_forearm_id = skeleton.find_bone("mixamorig_LeftForeArm")
+	right_forearm_id = skeleton.find_bone("mixamorig_RightForeArm")	
+	
+	skeleton.set_bone_pose_rotation(left_forearm_id, Quaternion(0, -1, 0, 1))
+	skeleton.set_bone_pose_rotation(right_forearm_id, Quaternion(0, 1, 0, 1))	
+	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	track_mouse_3d()
-	var mouse_position_no_z : Vector3 = mouse_position_3d
-	mouse_position_no_z.z = 0 
-	left_ik.set_position(mouse_position_no_z)
-#	left_ik.translate(mouse_position_no_z)
-	right_ik.set_position(mouse_position_no_z)	
-#	left_hand = left_hand.translated(mouse_position_3d)
-#	left_hand = left_hand.rotated(Vector3(0, 1, 0), 0.1 * delta)
-#	skeleton.set_bone_pose_position(left_hand_id, mouse_position_3d)
-#	skeleton.set_bone_global_pose_override(left_hand_id, left_hand, amount, persistent)
+	pass	
 	
-	
-func track_mouse_3d():
-	var viewport : Viewport = get_viewport()
-	var mouse_position : Vector2 = viewport.get_mouse_position()
-	print("normal mouse", mouse_position)
-	var camera : Camera3D = viewport.get_camera_3d()
-	
-	var origin : Vector3 = camera.project_ray_origin(mouse_position)
-	origin.z = 0
-	var direction : Vector3 = camera.project_ray_normal(mouse_position)
-	direction.z = 0
-	
-	var ray_length : float = camera.far
-	var end : Vector3 = origin + (direction * ray_length)
-	end.z = 0
-	
-	var space_state : PhysicsDirectSpaceState3D = get_world_3d().direct_space_state
-	var query : PhysicsRayQueryParameters3D = PhysicsRayQueryParameters3D.create(origin, end)
-	var result : Dictionary = space_state.intersect_ray(query)
-	
-	mouse_position_3d = result.get("position", end)
-	print(mouse_position_3d)
+
+
+func _on_area_3d_input_event(camera, event, position, normal, shape_idx):
+	mouse_position_3d = Vector3(position.x, position.y, 0)
+	var mouse_position_left: Vector3 = Vector3(mouse_position_3d.x + hand_separation, mouse_position_3d.y, 0)
+	var mouse_position_right: Vector3 = Vector3(mouse_position_3d.x - hand_separation, mouse_position_3d.y, 0)	
+	if not Input.is_action_pressed("hold_left"):
+		left_ik.set_position(mouse_position_left)
+	if not Input.is_action_pressed("hold_right"):		
+		right_ik.set_position(mouse_position_right)	
