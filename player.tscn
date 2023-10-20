@@ -15,6 +15,7 @@ hand_separation = 0.0
 
 [node name="Skeleton3D" parent="RootNode" index="0"]
 bones/4/rotation = Quaternion(0.000474975, 1.00048, 0.000474975, 27.3505)
+bones/5/rotation = Quaternion(0.000474975, 0.000474975, 0.000474975, 1.00048)
 
 [node name="LeftArmIKTarget" type="Marker3D" parent="RootNode/Skeleton3D" index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.450576, 1.12207, 0.455091)
@@ -43,6 +44,9 @@ use_magnet = true
 magnet = Vector3(-10, 0, 0)
 target_node = NodePath("../RightArmIKTarget")
 script = ExtResource("2_drnj1")
+
+[node name="Eyes" type="Marker3D" parent="RootNode/Skeleton3D" index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.71808, 0)
 
 [node name="Area3D" type="Area3D" parent="RootNode" index="1"]
 
