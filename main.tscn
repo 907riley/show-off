@@ -13,7 +13,7 @@ transform = Transform3D(-0.999939, 0, 0.0110827, 0, 1, 0, -0.0110827, 0, -0.9999
 [node name="Player" parent="." instance=ExtResource("1_kbols")]
 
 [node name="wall" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.936672, 0.350207, 0, -0.350207, 0.936672, 0, 0, 1)
+transform = Transform3D(1, 0, 0, 0, 0.939692, 0.34202, 0, -0.34202, 0.939692, 0, 0, 1)
 size = Vector3(25, 25, 0)
 
 [node name="left_hold" parent="wall" instance=ExtResource("2_vnbv3")]
