@@ -1,14 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://dguntvb7fxlui"]
+[gd_scene load_steps=5 format=3 uid="uid://otq6j3ndrf78"]
 
-[ext_resource type="Script" path="res://RootNode.gd" id="2_08a25"]
-[ext_resource type="Script" path="res://start_ik.gd" id="2_drnj1"]
+[ext_resource type="Script" path="res://scripts/RootNode.gd" id="2_auhwr"]
 [ext_resource type="PackedScene" uid="uid://c8f472f3mleip" path="res://Rumba Dancing.fbx" id="3_1p5ru"]
+[ext_resource type="Script" path="res://scripts/start_ik.gd" id="3_cn8r1"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1vq6g"]
 size = Vector3(1000, 1000, 0)
 
 [node name="Player" instance=ExtResource("3_1p5ru")]
-script = ExtResource("2_08a25")
+script = ExtResource("2_auhwr")
 
 [node name="Skeleton3D" parent="RootNode" index="0"]
 bones/4/rotation = Quaternion(0.000474975, 1.00048, 0.000474975, 27.3505)
@@ -30,7 +30,7 @@ override_tip_basis = false
 use_magnet = true
 magnet = Vector3(1, 0, -1)
 target_node = NodePath("../LeftArmIKTarget")
-script = ExtResource("2_drnj1")
+script = ExtResource("3_cn8r1")
 
 [node name="RightArm" type="SkeletonIK3D" parent="RootNode/Skeleton3D" index="5"]
 process_priority = 1
@@ -40,7 +40,7 @@ override_tip_basis = false
 use_magnet = true
 magnet = Vector3(-1, 0, -1)
 target_node = NodePath("../RightArmIKTarget")
-script = ExtResource("2_drnj1")
+script = ExtResource("3_cn8r1")
 
 [node name="Eyes" type="Marker3D" parent="RootNode/Skeleton3D" index="6"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.71808, 0)
