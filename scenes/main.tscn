@@ -1,25 +1,25 @@
 [gd_scene load_steps=4 format=3 uid="uid://0qltwybo0tmk"]
 
-[ext_resource type="Script" path="res://scripts/main.gd" id="1_80w7a"]
-[ext_resource type="PackedScene" uid="uid://otq6j3ndrf78" path="res://player.tscn" id="1_kbols"]
-[ext_resource type="PackedScene" uid="uid://dhulbfycaditv" path="res://hold.tscn" id="2_vnbv3"]
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_hm1pn"]
+[ext_resource type="PackedScene" uid="uid://otq6j3ndrf78" path="res://scenes/player.tscn" id="2_w70jo"]
+[ext_resource type="PackedScene" uid="uid://dhulbfycaditv" path="res://scenes/hold.tscn" id="3_2s7op"]
 
 [node name="main" type="Node3D"]
-script = ExtResource("1_80w7a")
+script = ExtResource("1_hm1pn")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(-0.999939, 0, 0.0110827, 0, 1, 0, -0.0110827, 0, -0.999939, 0, 1, -3.50227)
 
-[node name="Player" parent="." instance=ExtResource("1_kbols")]
+[node name="Player" parent="." instance=ExtResource("2_w70jo")]
 
 [node name="wall" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.939692, 0.34202, 0, -0.34202, 0.939692, 0, 0, 1)
 size = Vector3(25, 25, 0)
 
-[node name="left_hold" parent="wall" instance=ExtResource("2_vnbv3")]
+[node name="left_hold" parent="wall" instance=ExtResource("3_2s7op")]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.633034, 1.76494, 0)
 
-[node name="right_hold" parent="wall" instance=ExtResource("2_vnbv3")]
+[node name="right_hold" parent="wall" instance=ExtResource("3_2s7op")]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, -1.49012e-08, 0, 1.49012e-08, 0.4, -0.620201, 1.76494, 0)
 
 [node name="floor" type="CSGBox3D" parent="."]
