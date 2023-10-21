@@ -8,10 +8,7 @@
 size = Vector3(1000, 1000, 0)
 
 [node name="Player" instance=ExtResource("3_1p5ru")]
-
-[node name="RootNode" parent="." index="0"]
 script = ExtResource("2_08a25")
-hand_separation = 0.0
 
 [node name="Skeleton3D" parent="RootNode" index="0"]
 bones/4/rotation = Quaternion(0.000474975, 1.00048, 0.000474975, 27.3505)
@@ -28,7 +25,7 @@ top_level = true
 [node name="LeftArm" type="SkeletonIK3D" parent="RootNode/Skeleton3D" index="4"]
 process_priority = 1
 root_bone = &"mixamorig_LeftShoulder"
-tip_bone = &"mixamorig_LeftHandMiddle4"
+tip_bone = &"mixamorig_LeftHandMiddle1"
 override_tip_basis = false
 use_magnet = true
 magnet = Vector3(10, 0, 0)
@@ -38,7 +35,7 @@ script = ExtResource("2_drnj1")
 [node name="RightArm" type="SkeletonIK3D" parent="RootNode/Skeleton3D" index="5"]
 process_priority = 1
 root_bone = &"mixamorig_RightShoulder"
-tip_bone = &"mixamorig_RightHandMiddle4"
+tip_bone = &"mixamorig_RightHandMiddle1"
 override_tip_basis = false
 use_magnet = true
 magnet = Vector3(-10, 0, 0)
@@ -61,4 +58,4 @@ visible = false
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.737, -2.595)
 visible = false
 
-[connection signal="input_event" from="RootNode/Area3D" to="RootNode" method="_on_area_3d_input_event"]
+[connection signal="input_event" from="RootNode/Area3D" to="." method="_on_area_3d_input_event"]
