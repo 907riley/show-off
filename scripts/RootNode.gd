@@ -37,6 +37,7 @@ var right_ik: Marker3D
 var head_marker: Marker3D
 
 @export var hand_separation: float = 0
+@export var hand_pull_offset_to_shoulder: float = .2
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -68,8 +69,14 @@ func _ready():
 func _process(delta):
 	
 	if Input.is_action_pressed("pull_left_arm"):
-		set_left_hand_position(skeleton.get_bone_global_pose(left_shoulder_id).origin)
-	pass	
+		# set left hand to left shoulder
+		var left_shoulder_pos: Vector3 = skeleton.get_bone_global_pose(left_shoulder_id).origin
+		set_left_hand_position(Vector3(left_shoulder_pos.x, left_shoulder_pos.y + hand_pull_offset_to_shoulder, left_shoulder_pos.z))
+		
+	if Input.is_action_pressed("pull_right_arm"):
+		# set right hand to right shoulder
+		var right_shoulder_pos: Vector3 = skeleton.get_bone_global_pose(right_shoulder_id).origin
+		set_right_hand_position(Vector3(right_shoulder_pos.x, right_shoulder_pos.y + hand_pull_offset_to_shoulder, right_shoulder_pos.z))
 	
 
 

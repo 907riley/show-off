@@ -15,11 +15,11 @@ bones/4/rotation = Quaternion(0.000474975, 1.00048, 0.000474975, 27.3505)
 bones/5/rotation = Quaternion(0.000474975, 0.000474975, 0.000474975, 1.00048)
 
 [node name="LeftArmIKTarget" type="Marker3D" parent="RootNode/Skeleton3D" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.450576, 1.98964, -0.398691)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.183443, 1.69878, 0.00688595)
 top_level = true
 
 [node name="RightArmIKTarget" type="Marker3D" parent="RootNode/Skeleton3D" index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00238959, 1.778, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.423073, 1.778, 0)
 top_level = true
 
 [node name="LeftArm" type="SkeletonIK3D" parent="RootNode/Skeleton3D" index="4"]
@@ -28,7 +28,7 @@ root_bone = &"mixamorig_LeftShoulder"
 tip_bone = &"mixamorig_LeftHandMiddle1"
 override_tip_basis = false
 use_magnet = true
-magnet = Vector3(1, 0, -1)
+magnet = Vector3(10, 0, -1)
 target_node = NodePath("../LeftArmIKTarget")
 script = ExtResource("3_cn8r1")
 
@@ -38,7 +38,7 @@ root_bone = &"mixamorig_RightShoulder"
 tip_bone = &"mixamorig_RightHandMiddle1"
 override_tip_basis = false
 use_magnet = true
-magnet = Vector3(-1, 0, -1)
+magnet = Vector3(-10, 0, -1)
 target_node = NodePath("../RightArmIKTarget")
 script = ExtResource("3_cn8r1")
 
