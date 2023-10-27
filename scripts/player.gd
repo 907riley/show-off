@@ -36,6 +36,8 @@ var right_ik: Marker3D
 # markers for head
 var head_marker: Marker3D
 
+@export var left_hand_on_hold: bool = false
+@export var right_hand_on_hold: bool = false
 @export var hand_separation: float = 0
 @export var hand_pull_offset_to_shoulder: float = .2
 
@@ -69,14 +71,22 @@ func _ready():
 func _process(delta):
 	
 	if Input.is_action_pressed("pull_left_arm"):
-		# set left hand to left shoulder
-		var left_shoulder_pos: Vector3 = skeleton.get_bone_global_pose(left_shoulder_id).origin
-		set_left_hand_position(Vector3(left_shoulder_pos.x, left_shoulder_pos.y + hand_pull_offset_to_shoulder, left_shoulder_pos.z))
+		if left_hand_on_hold:
+			# set left shoulder to left hand
+			pass
+		else:
+			# set left hand to left shoulder
+			var left_shoulder_pos: Vector3 = skeleton.get_bone_global_pose(left_shoulder_id).origin
+			set_left_hand_position(Vector3(left_shoulder_pos.x, left_shoulder_pos.y + hand_pull_offset_to_shoulder, left_shoulder_pos.z))
 		
 	if Input.is_action_pressed("pull_right_arm"):
-		# set right hand to right shoulder
-		var right_shoulder_pos: Vector3 = skeleton.get_bone_global_pose(right_shoulder_id).origin
-		set_right_hand_position(Vector3(right_shoulder_pos.x, right_shoulder_pos.y + hand_pull_offset_to_shoulder, right_shoulder_pos.z))
+		if right_hand_on_hold:
+			# set right shoulder to right hand
+			pass
+		else:
+			# set right hand to right shoulder
+			var right_shoulder_pos: Vector3 = skeleton.get_bone_global_pose(right_shoulder_id).origin
+			set_right_hand_position(Vector3(right_shoulder_pos.x, right_shoulder_pos.y + hand_pull_offset_to_shoulder, right_shoulder_pos.z))
 	
 
 
@@ -98,6 +108,10 @@ func _on_area_3d_input_event(camera, event, position, normal, shape_idx):
 #	head = head.orthonormalized()
 #	head.basis = head.basis.rotated(head.basis.x, deg_to_rad(5))
 	skeleton.set_bone_pose_rotation(head_id, head.basis)
+	
+#func set_left_shoulder_position(position: Vector3):
+#	var mouse_position_left: Vector3 = Vector3(position.x, position.y, 0)
+#	left_ik.set_position(mouse_position_left)
 	
 func set_left_hand_position(position: Vector3):
 	var mouse_position_left: Vector3 = Vector3(position.x, position.y, 0)
