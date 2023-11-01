@@ -95,10 +95,10 @@ func _on_area_3d_input_event(camera, event, position, normal, shape_idx):
 	var mouse_position_left: Vector3 = Vector3(mouse_position_3d.x + hand_separation, mouse_position_3d.y, position.z)
 	var mouse_position_right: Vector3 = Vector3(mouse_position_3d.x - hand_separation, mouse_position_3d.y, position.z)	
 	print(mouse_position_3d)
-	# TODO: revert these
-	if  Input.is_action_pressed("hold_left"):
+	# TODO: revert revert these
+	if not Input.is_action_pressed("hold_left"):
 		left_ik.set_position(mouse_position_left)
-	if  Input.is_action_pressed("hold_right"):		
+	if not Input.is_action_pressed("hold_right"):		
 		right_ik.set_position(mouse_position_right)	
 		
 #	var head_mouse_position_3d: Vector3 = Vector3(mouse_position_3d.x, mouse_position_3d.y, 20)
