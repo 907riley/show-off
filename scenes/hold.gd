@@ -1,9 +1,10 @@
-extends Skeleton3D
+extends Node3D
 
-
+var static_body: StaticBody3D
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	physical_bones_start_simulation()
+	static_body = $"StaticBody3D"
+	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
